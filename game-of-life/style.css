@@ -1,13 +1,11 @@
 body{
-	display:flex;
-	flex-direction:column;
-	align-items:center;
-	justify-content:center;
-	background:#bbb;	
+	display:grid;
+	place-items:center;
+	background:#111;	
 }
 
-#canvas{
-	border:2px solid red
+#canvas {
+	box-shadow: 0 0 0 20px white;§
 }
 
 .start-btn {
