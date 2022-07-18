@@ -1,28 +1,46 @@
 const startBtn = document.querySelector(".start-btn")
+const trailBtn = document.querySelector(".trail-btn")
+const hueSlider = document.querySelector("#hue-slider")
+const hueSliderLabel = document.querySelector("#hue-slider-value")
+const saturationSlider = document.querySelector("#saturation-slider")
+const saturationSliderLabel = document.querySelector("#saturation-slider-value")
+const lightSlider = document.querySelector("#light-slider")
+const lightSliderLabel = document.querySelector("#light-slider-value")
 const canvas = document.querySelector("#canvas")
 const c = canvas.getContext("2d")
 
+
 let height = 600;
-let widthToHeightRatio = 4
+let widthToHeightRatio = 2.5
 let width = height * widthToHeightRatio 
 canvas.width = width
 canvas.height = height
 let resolution = 100
 
+let trail = true
+let saturationMultiplier = 1
+let lightMultiplier = .5
+let hue = 20
+
+hueSlider.value = hue
+hueSliderLabel.innerText = hueSlider.value
+
 class Cell{
 	constructor(x,y){
 		this.x = x
 		this.y = y
-		this.alive = Math.random() * Math.random() > .5 ? true:false
+		this.alive = Math.random() * Math.random() > .65 ? true:false
 		this.previous = this.alive
 		this.neighbors = 0
 		this.next = true	
 		this.timeSinceAlive = 0
-	}
+		}
 
 	display(){
 	//	c.fillStyle = this.alive ? "white" : "black"
-		c.fillStyle = `hsl(20,${this.timeSinceAlive * 2 }%,${100 - this.timeSinceAlive * 1 }%)`
+		
+		trail ? c.fillStyle = `hsl(${hue},${this.timeSinceAlive * saturationMultiplier }%,${100 - this.timeSinceAlive * lightMultiplier }%)` : c.fillStyle = this.alive ? "white" : "black"
+
 		c.fillRect(this.x * (width/(resolution*(width/height))),this.y*height/resolution,height/resolution,height/resolution)	
 		this.deadOrAlive()
 		this.updateTimeAlive()
@@ -34,6 +52,7 @@ class Cell{
 	}
 
 	deadOrAlive(){
+
 		if(this.alive && this.neighbors === 2 || this.neighbors === 3){
 			this.next = true
 		}
@@ -70,11 +89,18 @@ let rows = resolution
  
 let previousTime
 let animationID
+
 function animate(time){
 	animationID = requestAnimationFrame(animate)
-	if(time - previousTime < 100){
+//console.log(time - previousTime)
+// ~ 60ms with two loops 100 resolution
+// ~ 250ms with two loops 200 resolution
+
+
+	if(time - previousTime < 5){
 		return
 	}
+	
 	previousTime = time
 	
 	for(let i = 0;i<boardArr.length;i++){
@@ -87,7 +113,7 @@ function animate(time){
 					if(current.alive){
 						count ++	
 					}
-				}
+					}
 			}	
 // =>=>=>=>=>=>=>=>=>=>=>=>=> =================== <=<=<=<=<=<=<=<=<=<=<=<=<=<=
 			boardArr[i][j].updateNeighbors(count)
@@ -106,10 +132,28 @@ function stopAnimate(){
 	cancelAnimationFrame(animationID)
 }
 
-animate()
 
 let animating = false
 startBtn.addEventListener("click",()=>{
 	!animating ? animate() : stopAnimate()
 	animating = !animating
+})
+
+trailBtn.addEventListener("click",()=>{
+	trail = !trail
+})
+
+hueSlider.addEventListener("input",()=>{
+	hueSliderLabel.innerText = hueSlider.value
+	hue = hueSlider.value
+})
+
+saturationSlider.addEventListener("input",()=>{
+	saturationSliderLabel.innerText = saturationSlider.value
+	saturationMultiplier = saturationSlider.value
+})
+
+lightSlider.addEventListener("input",()=>{
+	lightSliderLabel.innerText = lightSlider.value
+	lightMultiplier = lightSlider.value
 })
