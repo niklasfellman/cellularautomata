@@ -6,8 +6,11 @@ const saturationSlider = document.querySelector("#saturation-slider")
 const saturationSliderLabel = document.querySelector("#saturation-slider-value")
 const lightSlider = document.querySelector("#light-slider")
 const lightSliderLabel = document.querySelector("#light-slider-value")
+const slidersContainer = document.querySelector(".sliders-container")
 const canvas = document.querySelector("#canvas")
 const c = canvas.getContext("2d")
+
+console.log(slidersContainer)
 
 
 let height = 600;
@@ -17,7 +20,7 @@ canvas.width = width
 canvas.height = height
 let resolution = 100
 
-let trail = true
+let trail = false
 let saturationMultiplier = 1
 let lightMultiplier = .5
 let hue = 20
@@ -141,6 +144,7 @@ startBtn.addEventListener("click",()=>{
 
 trailBtn.addEventListener("click",()=>{
 	trail = !trail
+	trail ? slidersContainer.style.visibility = "visible" : slidersContainer.style.visibility = "hidden"
 })
 
 hueSlider.addEventListener("input",()=>{
