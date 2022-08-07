@@ -7,23 +7,25 @@
 	<body>
 		<canvas id="canvas"></canvas>
 		<div class="settings">
+		<div class="button-container">
 		<button class="start-btn">Start</button>
 		<button class="trail-btn">Trail</button>
+</div>
 		<div class="sliders-container">
 			<div class="slider-container">
-				<span>Hue</span>
+				<div class="label">Hue</div>
 				<input type="range" class="slider" min="1" max="255" step="1" id="hue-slider">
-				<span id="hue-slider-value">0</span>
+				<div class="value" id="hue-slider-value">0</div>
 			</div>
 			<div class="slider-container">
-				<span>Saturation</span>
+				<div class="label">Saturation</div>
 				<input type="range" class="slider" min="0" max="2" step="0.01" id="saturation-slider" >
-				<span id="saturation-slider-value">0</span>
+				<div class="value" id="saturation-slider-value">0</div>
 			</div>
 			<div class="slider-container">
-				<span>Light</span>
+				<div class="label">Light</div>
 				<input type="range" class="slider" min="0.17" max="5" step="0.001" id="light-slider">
-				<span id="light-slider-value">0</span>
+				<div class="value" id="light-slider-value">0</div>
 			</div>
 		</div>
 	</body>

@@ -18,7 +18,7 @@ let widthToHeightRatio = 2.5
 let width = height * widthToHeightRatio 
 canvas.width = width
 canvas.height = height
-let resolution = 100
+let resolution = 120
 
 let trail = false
 let saturationMultiplier = 1

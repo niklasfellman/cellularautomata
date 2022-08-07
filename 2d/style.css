@@ -1,0 +1,27 @@
+body{
+background:#ddd;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.board{
+border:1px solid green
+}
+
+.header{
+border:1px solid red;
+height:100px;
+}
+
+
+#canvas {
+
+padding:10px;	
+
+}
+
+.settings{
+border:1px solid blue;
+height:100px;
+}
