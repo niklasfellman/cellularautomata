@@ -1,27 +1,67 @@
 body{
-background:#ddd;
+background:#fff;
 display:flex;
 align-items:center;
 justify-content:center;
 }
 
 .board{
-border:1px solid green
+font-family: 'Josefin Slab', serif;
 }
 
 .header{
-border:1px solid red;
-height:100px;
 }
 
 
 #canvas {
-
-padding:10px;	
+padding:10px;
 
 }
 
 .settings{
-border:1px solid blue;
-height:100px;
+user-select:none;
 }
+
+.title-container{
+display:flex;
+justify-content:space-between;
+padding:0 12px;
+}
+
+.title {
+font-size:24px;
+font-weight:500;
+}
+
+.rules-container{
+	margin:20px 0 5px 0;
+	display:flex;
+	justify-content:center;
+}
+
+.rule-container{
+	display:grid;	
+	grid-template-columns: repeat(3,1fr);	
+	margin: 0 4px;	
+}
+
+.rule-cell{
+	width:8px;
+	height:8px;
+	background:#fff;
+	margin:3px;
+	box-shadow:0 0 0 1px #fff, 0 0 0 2px #999;
+}
+
+.alive {
+	background:#333;
+}
+
+.result {
+	grid-column:2;
+}
+
+.case-slider{
+width:500px;
+}
+

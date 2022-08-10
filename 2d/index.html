@@ -1,18 +1,78 @@
 <html>
-<head>
-<title>basic</title>
-<link rel="stylesheet" href="style.css" />
-<script src="script.js" defer></script>
-</head>
+	<head>
+		<title>basic</title>
+		<link rel="stylesheet" href="style.css" />
+		<script src="script.js" defer></script>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@400;500&display=swap" rel="stylesheet">
+	</head>
 <body>
-
-<div class="board">
-	<div class="header"></div>
-	<canvas id="canvas" class="canvas"></canvas>
-	<div class="settings"></div>
-</div>
-
+	<div class="board">
+		<div class="header">
+			<div class="title-container">
+				<div class="title">Cellular Automata</div>
+				<div class="title rule-number">Rule 137</div>
+			</div>
+			<div class="rules-container">
+				<div class="rule-container">
+					<div class="rule-cell alive"></div>
+					<div class="rule-cell alive"></div>
+					<div class="rule-cell alive"></div>
+					<div class="rule-cell result"></div>
+				</div>
+				<div class="rule-container">
+					<div class="rule-cell alive"></div>
+					<div class="rule-cell alive"></div>
+					<div class="rule-cell"></div>
+					<div class="rule-cell result"></div>
+				</div>
+				<div class="rule-container">
+					<div class="rule-cell alive"></div>
+					<div class="rule-cell"></div>
+					<div class="rule-cell alive"></div>
+					<div class="rule-cell result"></div>
+				</div>
+				<div class="rule-container">
+					<div class="rule-cell alive"></div>
+					<div class="rule-cell"></div>
+					<div class="rule-cell"></div>
+					<div class="rule-cell result"></div>
+				</div>
+				<div class="rule-container">
+					<div class="rule-cell"></div>
+					<div class="rule-cell alive"></div>
+					<div class="rule-cell alive"></div>
+					<div class="rule-cell result"></div>
+				</div>
+				<div class="rule-container">
+					<div class="rule-cell"></div>
+					<div class="rule-cell alive"></div>
+					<div class="rule-cell"></div>
+					<div class="rule-cell result"></div>
+				</div>
+				<div class="rule-container">
+					<div class="rule-cell"></div>
+					<div class="rule-cell"></div>
+					<div class="rule-cell alive"></div>
+					<div class="rule-cell result"></div>
+				</div>
+				<div class="rule-container">
+					<div class="rule-cell"></div>
+					<div class="rule-cell"></div>
+					<div class="rule-cell"></div>
+					<div class="rule-cell result"></div>
+				</div>
+			</div>
+		</div>
+		<canvas id="canvas" class="canvas"></canvas>
+		<div class="settings">
+			<button class="previous">previous</button>
+			<button class="new">create board</button>
+			<button class="next">next</button>
+			<input class="case-slider" id="case-slider" type="range" min="0" max="255" value="30"><label for="case-slider">30</label>
+		</div>
+	</div>
 </body>
-
 </html>
 

@@ -1,9 +1,22 @@
+const resultCells = document.querySelectorAll(".result")
 const canvas = document.querySelector("#canvas")
 const c = canvas.getContext("2d")
+const newBtn = document.querySelector(".new")
+const caseSlider = document.querySelector(".case-slider")
+const ruleTitle = document.querySelector(".rule-number")
+const nextBtn = document.querySelector(".next")
+const previousBtn = document.querySelector(".previous")
+
 canvas.width = 800
 canvas.height = 800
 let height = canvas.height
 let width = canvas.width
+
+caseSlider.value = 30
+
+let caseNumber = parseInt(caseSlider.value)
+ruleTitle.innerText = `Rule ${caseNumber}`
+let resolution = 200
 
 class Cell{
 	constructor(x,y,res = 10,alive = false){
@@ -20,13 +33,11 @@ class Cell{
 	}
 }
 
-
-
 class Board{
-	constructor(res = 100,ruleN = "00011110"){
+	constructor(res = 100,ruleN = 30){
 		this.resolution = res % 2 === 0 ? res + 1 : res
 		this.grid = []
-		this.ruleN = ruleN
+		this.ruleN = (ruleN).toString(2).padStart(8,"0")
 		this.rule = {
 			"111" : this.ruleN[0],	
 			"110" : this.ruleN[1],	
@@ -38,8 +49,6 @@ class Board{
 			"000" : this.ruleN[7],	
 		}
 
-		
-
 		for(let i = 0;i<1;i++){
 			this.grid.push([])
 			for(let j = 0;j<this.resolution;j++){
@@ -48,8 +57,6 @@ class Board{
 		}
 	}
 
-	
-
 	display(){
 		for(let i = 0;i<this.grid.length;i++){
 			for(let j = 0;j<this.grid[i].length;j++){
@@ -57,7 +64,6 @@ class Board{
 			}
 		}	
 	}		
-	
 
 	update(){
 		let arr = [false]
@@ -76,20 +82,53 @@ class Board{
 			this.grid[this.grid.length-1].push(new Cell(this.grid.length-1,i,this.resolution,arr[i]))
 		}	
 	}
-
-	
-
-
 }
 
-let board = new Board(3000,(137).toString(2).padStart(8,"0"))
+let board;
+function createBoard(resolution,caseN){
+	let ruleBinary = (caseN).toString(2).padStart(8,"0").split("")
 
-for(let i = 0;i<3000;i++){
-	board.update()
+	console.log(ruleBinary)
+	for(let i = 0;i<resultCells.length;i++){
+		resultCells[i].style.backgroundColor = ruleBinary[i] === "1" ? "black" : "white"
+	}	
+
+	c.clearRect(0,0,width,height)
+	let board = new Board(resolution,caseN)
+	for(let i = 0;i<resolution;i++){
+		board.update()
+	}
+	board.display()
 }
 
-board.display()
+createBoard(resolution,30)
 
-console.log(board.rule)
-console.log((30).toString(2).padStart(8,"0"))
+newBtn.addEventListener("click",()=>{
+	createBoard(resolution,caseNumber)	
+	ruleTitle.innerText = `Rule ${caseNumber}`
+})
+
+nextBtn.addEventListener("click",()=>{
+	if(caseNumber === 255){return}
+	caseNumber ++
+	caseSlider.labels[0].innerText = caseNumber
+	caseSlider.value= caseNumber
+	createBoard(resolution,caseNumber)	
+	ruleTitle.innerText = `Rule ${caseNumber}`
+})
+
+previousBtn.addEventListener("click",()=>{
+	if(caseNumber === 0){return}
+	caseNumber --
+	caseSlider.labels[0].innerText = caseNumber
+	caseSlider.value= caseNumber
+	createBoard(resolution,caseNumber)	
+	ruleTitle.innerText = `Rule ${caseNumber}`
+})
+
+caseSlider.addEventListener("input",(x)=>{
+	console.log(x.target.value)
+	caseNumber = parseInt(x.target.value)
+	caseSlider.labels[0].innerText = caseNumber
+})
 
