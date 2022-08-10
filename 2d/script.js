@@ -28,7 +28,7 @@ class Cell{
 	}
 
 	displayCell(){
-		c.fillStyle = this.alive ? "black" : "white"
+		c.fillStyle = this.alive ? "#000" : "white"
 		c.fillRect(this.y * width/this.resolution,this.x * height/this.resolution,width/this.resolution,height/this.resolution)
 	}
 }
@@ -90,7 +90,7 @@ function createBoard(resolution,caseN){
 
 	console.log(ruleBinary)
 	for(let i = 0;i<resultCells.length;i++){
-		resultCells[i].style.backgroundColor = ruleBinary[i] === "1" ? "black" : "white"
+		resultCells[i].style.backgroundColor = ruleBinary[i] === "1" ? "#444" : "white"
 	}	
 
 	c.clearRect(0,0,width,height)
@@ -111,7 +111,7 @@ newBtn.addEventListener("click",()=>{
 nextBtn.addEventListener("click",()=>{
 	if(caseNumber === 255){return}
 	caseNumber ++
-	caseSlider.labels[0].innerText = caseNumber
+	caseSlider.labels[1].innerText = caseNumber
 	caseSlider.value= caseNumber
 	createBoard(resolution,caseNumber)	
 	ruleTitle.innerText = `Rule ${caseNumber}`
@@ -120,7 +120,7 @@ nextBtn.addEventListener("click",()=>{
 previousBtn.addEventListener("click",()=>{
 	if(caseNumber === 0){return}
 	caseNumber --
-	caseSlider.labels[0].innerText = caseNumber
+	caseSlider.labels[1].innerText = caseNumber
 	caseSlider.value= caseNumber
 	createBoard(resolution,caseNumber)	
 	ruleTitle.innerText = `Rule ${caseNumber}`
@@ -129,6 +129,6 @@ previousBtn.addEventListener("click",()=>{
 caseSlider.addEventListener("input",(x)=>{
 	console.log(x.target.value)
 	caseNumber = parseInt(x.target.value)
-	caseSlider.labels[0].innerText = caseNumber
+	caseSlider.labels[1].innerText = caseNumber
 })
 
