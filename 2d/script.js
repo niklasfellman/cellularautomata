@@ -7,16 +7,18 @@ const ruleTitle = document.querySelector(".rule-number")
 const nextBtn = document.querySelector(".next")
 const previousBtn = document.querySelector(".previous")
 
+const resolutionSlider = document.querySelector(".resolution-slider")
+
 canvas.width = 800
 canvas.height = 800
 let height = canvas.height
 let width = canvas.width
 
 caseSlider.value = 30
-
 let caseNumber = parseInt(caseSlider.value)
 ruleTitle.innerText = `Rule ${caseNumber}`
-let resolution = 200
+let resolution = parseInt(resolutionSlider.value)
+console.log(resolutionSlider)
 
 class Cell{
 	constructor(x,y,res = 10,alive = false){
@@ -101,10 +103,10 @@ function createBoard(resolution,caseN){
 	board.display()
 }
 
-createBoard(resolution,30)
+	createBoard(parseInt(resolutionSlider.value),caseNumber)	
 
 newBtn.addEventListener("click",()=>{
-	createBoard(resolution,caseNumber)	
+	createBoard(parseInt(resolutionSlider.value),caseNumber)	
 	ruleTitle.innerText = `Rule ${caseNumber}`
 })
 
@@ -113,7 +115,7 @@ nextBtn.addEventListener("click",()=>{
 	caseNumber ++
 	caseSlider.labels[1].innerText = caseNumber
 	caseSlider.value= caseNumber
-	createBoard(resolution,caseNumber)	
+	createBoard(parseInt(resolutionSlider.value),caseNumber)	
 	ruleTitle.innerText = `Rule ${caseNumber}`
 })
 
@@ -122,7 +124,6 @@ previousBtn.addEventListener("click",()=>{
 	caseNumber --
 	caseSlider.labels[1].innerText = caseNumber
 	caseSlider.value= caseNumber
-	createBoard(resolution,caseNumber)	
 	ruleTitle.innerText = `Rule ${caseNumber}`
 })
 
