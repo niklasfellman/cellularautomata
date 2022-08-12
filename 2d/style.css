@@ -70,6 +70,7 @@ body {
 }
 
 label {
+	width:75px;
 	margin:0 10px
 }
 
@@ -84,3 +85,8 @@ button {
 	margin:10px;
 	cursor:pointer;
 }
+
+.resolution-slider{
+width:500px;
+}
+

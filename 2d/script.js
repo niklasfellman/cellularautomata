@@ -18,7 +18,6 @@ caseSlider.value = 30
 let caseNumber = parseInt(caseSlider.value)
 ruleTitle.innerText = `Rule ${caseNumber}`
 let resolution = parseInt(resolutionSlider.value)
-console.log(resolutionSlider)
 
 class Cell{
 	constructor(x,y,res = 10,alive = false){
@@ -89,12 +88,9 @@ class Board{
 let board;
 function createBoard(resolution,caseN){
 	let ruleBinary = (caseN).toString(2).padStart(8,"0").split("")
-
-	console.log(ruleBinary)
 	for(let i = 0;i<resultCells.length;i++){
 		resultCells[i].style.backgroundColor = ruleBinary[i] === "1" ? "#444" : "white"
 	}	
-
 	c.clearRect(0,0,width,height)
 	let board = new Board(resolution,caseN)
 	for(let i = 0;i<resolution;i++){
@@ -124,12 +120,16 @@ previousBtn.addEventListener("click",()=>{
 	caseNumber --
 	caseSlider.labels[1].innerText = caseNumber
 	caseSlider.value= caseNumber
+	createBoard(parseInt(resolutionSlider.value),caseNumber)	
 	ruleTitle.innerText = `Rule ${caseNumber}`
 })
 
 caseSlider.addEventListener("input",(x)=>{
-	console.log(x.target.value)
 	caseNumber = parseInt(x.target.value)
 	caseSlider.labels[1].innerText = caseNumber
+})
+
+resolutionSlider.addEventListener("input",(x)=>{
+	resolutionSlider.labels[1].innerText = resolutionSlider.value	
 })
 
