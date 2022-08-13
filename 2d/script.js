@@ -6,6 +6,7 @@ const caseSlider = document.querySelector(".case-slider")
 const ruleTitle = document.querySelector(".rule-number")
 const nextBtn = document.querySelector(".next")
 const previousBtn = document.querySelector(".previous")
+const randomSeedCheckBox = document.querySelector("#random-seed")
 
 const resolutionSlider = document.querySelector(".resolution-slider")
 
@@ -18,6 +19,7 @@ caseSlider.value = 30
 let caseNumber = parseInt(caseSlider.value)
 ruleTitle.innerText = `Rule ${caseNumber}`
 let resolution = parseInt(resolutionSlider.value)
+let randomSeed = false
 
 class Cell{
 	constructor(x,y,res = 10,alive = false){
@@ -53,7 +55,8 @@ class Board{
 		for(let i = 0;i<1;i++){
 			this.grid.push([])
 			for(let j = 0;j<this.resolution;j++){
-				this.grid[i].push(new Cell(i,j,this.resolution,(j == Math.floor(this.resolution/2))))	
+				//this.grid[i].push(new Cell(i,j,this.resolution,(j == Math.floor(this.resolution/2))))	
+				this.grid[i].push(new Cell(i,j,this.resolution,(randomSeed ? Math.random() < .5 :(j == Math.floor(this.resolution/2))))) 	
 			}
 		}
 	}
@@ -131,5 +134,16 @@ caseSlider.addEventListener("input",(x)=>{
 
 resolutionSlider.addEventListener("input",(x)=>{
 	resolutionSlider.labels[1].innerText = resolutionSlider.value	
+})
+
+randomSeedCheckBox.addEventListener("click",(x)=>{
+	console.log(x)
+	if(x.target.checked){randomSeed = true}
+	if(!x.target.checked){randomSeed = false}
+
+	createBoard(parseInt(resolutionSlider.value),caseNumber)	
+
+
+	
 })
 
