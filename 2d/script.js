@@ -10,8 +10,8 @@ const randomSeedCheckBox = document.querySelector("#random-seed")
 
 const resolutionSlider = document.querySelector(".resolution-slider")
 
-canvas.width = 800
-canvas.height = 800
+canvas.width = 1000
+canvas.height = 1000
 let height = canvas.height
 let width = canvas.width
 

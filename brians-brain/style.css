@@ -1,0 +1,12 @@
+body{
+	background:#111;
+	color:#fff;
+	font-family:courier,monospace;	
+	display:grid;
+	place-items:center;
+}
+
+.board{
+	outline:1px solid pink
+}
+
