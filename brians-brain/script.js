@@ -3,6 +3,19 @@ const c = canvas.getContext("2d")
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight
 
+	// - - - - - - - - - - - - - -  GAME OF LIFE RULES - - - - - - - - - - - - - -  
+		//if(this.alive && this.neighbors === 2 || this.neighbors === 3){
+		//	this.alive = true
+		//}
+		//else{
+		//	this.alive = false
+		//}
+
+	
+	// - - - - - - - - - - - - - - briansbrain without dying state - - - - - - - - - - - - - -  
+		//if(this.alive){this.alive = false}
+		//if(!this.alive && this.neighbors === 2){this.alive = true}
+
 let resolution = 10
 		c.font = `${resolution + 4}px courier`
 		c.textAlign = "start"
@@ -13,16 +26,27 @@ class Cell{
 	constructor(x,y,alive = false){
 		this.x = x
 		this.y = y
-		this.alive = Math.random() > .5 
-		this.neighbors = Math.floor(Math.random() * 8)
+		this.lastX = x
+		this.lastY = y
+		this.alive = Math.random() > .99
+		this.neighbors = Math.floor(Math.random() * 6)
+		this.dying = false
 	}
 
 	toggleState(){
-		if(this.alive && this.neighbors === 2 || this.neighbors === 3){
-			this.alive = true
-		}
-		else{
+		if(this.alive){
 			this.alive = false
+			this.dying = true
+			return
+		}
+		if(this.dying){
+			this.alive = false;
+			this.dying = false;
+			return	
+		}
+		if(!this.alive && this.neighbors === 2 && this.dying === false){
+			this.alive = true;
+			return
 		}
 	}
 	
@@ -32,7 +56,18 @@ class Cell{
 
 	display(){
 		this.toggleState()
-		c.fillText(this.alive ? "•":"·", this.x, this.y);	
+		if(this.dying){
+			c.fillStyle = "red"
+			c.fillText("*",this.x, this.y)
+		}	
+		if(this.alive){
+			c.fillStyle = "#fff"
+			c.fillText("@",this.x,this.y)
+		}
+		//if(!this.dying && !this.alive){c.fillText(" ",this.x, this.y)}	
+		//c.fillText(this.alive ? "•":"·", this.x, this.y);	
+		this.lastX = this.x
+		this.lastY = this.y
 	}
 }
 
@@ -77,12 +112,31 @@ board.createBoard()
 board.update()
 console.log(board.boardArr)
 
-function animate(){
+let previousTime
+let animationID
+
+function animate(time){
+	
+	animationID = requestAnimationFrame(animate)
+	//console.log(time - previousTime)	
+	if(time - previousTime < 5){
+		return
+	}
+	previousTime = time
+
 	c.clearRect(0,0,canvas.width,canvas.height)
 	board.update()
 	
-	requestAnimationFrame(animate)
 }
 
 animate()
 
+function stopAnimate(){
+	cancelAnimationFrame(animationID)
+}
+
+//let animating = false
+//startBtn.addEventListener("click",()=>{
+//	!animating ? animate() : stopAnimate()
+//	animating = !animating
+//})
