@@ -16,7 +16,10 @@ canvas.height = window.innerHeight
 		//if(this.alive){this.alive = false}
 		//if(!this.alive && this.neighbors === 2){this.alive = true}
 
-let resolution = 10
+let resolution = 5
+let columns
+let rows
+
 		c.font = `${resolution + 4}px courier`
 		c.textAlign = "start"
 		c.textBaseline = "hanging"
@@ -26,8 +29,6 @@ class Cell{
 	constructor(x,y,alive = false){
 		this.x = x
 		this.y = y
-		this.lastX = x
-		this.lastY = y
 		this.alive = Math.random() > .99
 		this.neighbors = Math.floor(Math.random() * 6)
 		this.dying = false
@@ -58,11 +59,11 @@ class Cell{
 		this.toggleState()
 		if(this.dying){
 			c.fillStyle = "red"
-			c.fillText("*",this.x, this.y)
+			c.fillText("+",this.x, this.y)
 		}	
 		if(this.alive){
 			c.fillStyle = "#fff"
-			c.fillText("@",this.x,this.y)
+			c.fillText("#",this.x,this.y)
 		}
 		//if(!this.dying && !this.alive){c.fillText(" ",this.x, this.y)}	
 		//c.fillText(this.alive ? "•":"·", this.x, this.y);	
@@ -84,15 +85,20 @@ class Board{
 				this.boardArr[i][j].display()
 			}
 		}
+		columns = this.boardArr[0].length
+		rows = this.boardArr.length
+
+
 	}
 	
 	update(){
-		for(let i = 1;i<this.boardArr.length-1;i++){
-			for(let j = 1;j<this.boardArr[i].length -1;j++){
+		for(let i = 0;i<this.boardArr.length;i++){
+			for(let j = 0;j<this.boardArr[i].length;j++){
 				let count = 0;
 				for(let k = -1;k<2;k++){
 					for(let l = -1;l<2;l++){
-						if(this.boardArr[i+k][j+l].alive){count ++}
+						let current = this.boardArr[(i+k+rows)%rows][(j+l+columns)%columns]
+						if(current.alive){count ++}
 					}
 				}
 				if(this.boardArr[i][j].alive){count --}
@@ -119,7 +125,7 @@ function animate(time){
 	
 	animationID = requestAnimationFrame(animate)
 	//console.log(time - previousTime)	
-	if(time - previousTime < 5){
+	if(time - previousTime < 32){
 		return
 	}
 	previousTime = time
@@ -140,3 +146,4 @@ function stopAnimate(){
 //	!animating ? animate() : stopAnimate()
 //	animating = !animating
 //})
+
