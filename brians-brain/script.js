@@ -15,6 +15,9 @@ canvas.height = window.innerHeight
 	// - - - - - - - - - - - - - - briansbrain without dying state - - - - - - - - - - - - - -  
 		//if(this.alive){this.alive = false}
 		//if(!this.alive && this.neighbors === 2){this.alive = true}
+let rulesArr = ["briansBrain","conways","simpleTwoAlive"]
+
+let rule = rulesArr[0]
 
 let resolution = 5
 let columns
@@ -35,6 +38,9 @@ class Cell{
 	}
 
 	toggleState(){
+	
+	if(rule === "briansBrain"){
+	
 		if(this.alive){
 			this.alive = false
 			this.dying = true
@@ -50,6 +56,19 @@ class Cell{
 			return
 		}
 	}
+	if(rule === "conways"){
+		if(this.alive && this.neighbors === 2 || this.neighbors === 3){
+			this.alive = true
+		}
+		else{
+			this.alive = false
+		}
+	}	
+	if(rule === "simpleTwoAlive"){
+		if(this.alive){this.alive = false}
+		if(!this.alive && this.neighbors === 2){this.alive = true}
+
+	}}
 	
 	updateNeighbors(x){
 		this.neighbors = x
