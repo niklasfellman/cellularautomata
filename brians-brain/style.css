@@ -20,3 +20,38 @@ body{
 	left:0;
 	outline:1px solid gray
 }
+
+.settings {
+	background:white;
+	display:flex;
+	flex-direction:column;
+	width:80vmin;
+	position:absolute;
+	padding:20px;
+	color:#000;
+	justify-content:center;
+	align-items:center;
+}
+
+.text-input {
+	margin:0 5px;
+	width:20px;
+	height:20px;
+	text-align:center; 
+}	
+
+label {
+}
+
+.text-input-container {
+	display:flex;
+	flex-direction:column;
+}
+
+.text-input-container div{
+	display:flex;
+	justify-content:flex-end;
+}
+
+
+
