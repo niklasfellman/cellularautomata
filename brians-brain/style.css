@@ -15,23 +15,25 @@ body{
 }
 
 .canvas {
+	z-index:1;
 	position:absolute;
 	top:0;
 	left:0;
 	outline:1px solid gray
 }
 
-.settings {
+.settings-container {
 	visibility:hidden;
 	background:white;
 	display:flex;
 	flex-direction:column;
-	width:80vmin;
+	width:300px;
 	position:absolute;
-	padding:20px;
+	padding:30px;
 	color:#000;
 	justify-content:center;
 	align-items:center;
+z-index:5;
 }
 
 .text-input {
@@ -55,4 +57,14 @@ label {
 }
 
 
+.settings-btn{
+	position:absolute;
+	z-index:10;
+	cursor:pointer;
+	user-select:none
+}
 
+.show {
+color:#000; 
+visibility:visible;
+}

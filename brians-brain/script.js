@@ -5,6 +5,8 @@ canvas.height = window.innerHeight
 const createBtn = document.getElementById("create-btn")
 const bodySymbolInput = document.getElementById("body-symbol-input")
 const trailSymbolInput = document.getElementById("trail-symbol-input")
+const settingsBtn = document.querySelector(".settings-btn") 
+const settingsContainer = document.querySelector(".settings-container")
 	// - - - - - - - - - - - - - -  GAME OF LIFE RULES - - - - - - - - - - - - - -  
 		//if(this.alive && this.neighbors === 2 || this.neighbors === 3){
 		//	this.alive = true
@@ -177,3 +179,10 @@ trailSymbol =trailSymbolInput.value
 	board = new Board()
 	board.createBoard()
 })
+
+settingsBtn.addEventListener("click",()=>{
+	settingsContainer.classList.toggle("show")
+	settingsBtn.classList.toggle("show")
+	console.log("ert")
+})
+
