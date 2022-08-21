@@ -7,6 +7,7 @@ const bodySymbolInput = document.getElementById("body-symbol-input")
 const trailSymbolInput = document.getElementById("trail-symbol-input")
 const settingsBtn = document.querySelector(".settings-btn") 
 const settingsContainer = document.querySelector(".settings-container")
+const selectRule = document.getElementById("select-rule")
 	// - - - - - - - - - - - - - -  GAME OF LIFE RULES - - - - - - - - - - - - - -  
 		//if(this.alive && this.neighbors === 2 || this.neighbors === 3){
 		//	this.alive = true
@@ -19,11 +20,12 @@ const settingsContainer = document.querySelector(".settings-container")
 	// - - - - - - - - - - - - - - briansbrain without dying state - - - - - - - - - - - - - -  
 		//if(this.alive){this.alive = false}
 		//if(!this.alive && this.neighbors === 2){this.alive = true}
-let rulesArr = ["briansBrain","conways","simpleTwoAlive"]
+let rulesArr = ["briansBrain","conways","simple"]
 
-let rule = rulesArr[0]
+console.log(selectRule.value)
+let rule = selectRule.value 
 
-let resolution =15
+let resolution = 7
 let columns
 let rows
 let bodySymbol = "#"
@@ -69,7 +71,7 @@ class Cell{
 			this.alive = false
 		}
 	}	
-	if(rule === "simpleTwoAlive"){
+	if(rule === "simple"){
 		if(this.alive){this.alive = false}
 		if(!this.alive && this.neighbors === 2){this.alive = true}
 
@@ -89,8 +91,6 @@ class Cell{
 			c.fillStyle = "#fff"
 			c.fillText(bodySymbol,this.x,this.y)
 		}
-		//if(!this.dying && !this.alive){c.fillText(" ",this.x, this.y)}	
-		//c.fillText(this.alive ? "•":"·", this.x, this.y);	
 		this.lastX = this.x
 		this.lastY = this.y
 	}
@@ -111,8 +111,6 @@ class Board{
 		}
 		columns = this.boardArr[0].length
 		rows = this.boardArr.length
-
-
 	}
 	
 	update(){
@@ -140,7 +138,6 @@ class Board{
 let board = new Board()
 board.createBoard()
 board.update()
-console.log(board.boardArr)
 
 let previousTime
 let animationID
@@ -170,10 +167,8 @@ function stopAnimate(){
 //	!animating ? animate() : stopAnimate()
 //	animating = !animating
 //})
- console.log(createBtn)
-console.log(bodySymbolInput)
-console.log(trailSymbolInput)
 createBtn.addEventListener("click",()=>{
+rule = selectRule.value
 bodySymbol = bodySymbolInput.value
 trailSymbol =trailSymbolInput.value
 	board = new Board()
@@ -185,4 +180,6 @@ settingsBtn.addEventListener("click",()=>{
 	settingsBtn.classList.toggle("show")
 	console.log("ert")
 })
+
+
 
