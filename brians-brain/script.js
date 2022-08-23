@@ -2,35 +2,30 @@ const canvas = document.getElementById("canvas")
 const c = canvas.getContext("2d")
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight
+
+let width = canvas.width
+let height = canvas.height
+
 const createBtn = document.getElementById("create-btn")
 const bodySymbolInput = document.getElementById("body-symbol-input")
 const trailSymbolInput = document.getElementById("trail-symbol-input")
 const settingsBtn = document.querySelector(".settings-btn") 
 const settingsContainer = document.querySelector(".settings-container")
 const selectRule = document.getElementById("select-rule")
-	// - - - - - - - - - - - - - -  GAME OF LIFE RULES - - - - - - - - - - - - - -  
-		//if(this.alive && this.neighbors === 2 || this.neighbors === 3){
-		//	this.alive = true
-		//}
-		//else{
-		//	this.alive = false
-		//}
 
-	
-	// - - - - - - - - - - - - - - briansbrain without dying state - - - - - - - - - - - - - -  
-		//if(this.alive){this.alive = false}
-		//if(!this.alive && this.neighbors === 2){this.alive = true}
 let rulesArr = ["briansBrain","conways","simple"]
 
 console.log(selectRule.value)
 let rule = selectRule.value 
 
-let resolution = 7
+let resolution = 100
+let aspectRatio = width/height
+
 let columns
 let rows
 let bodySymbol = "#"
 let trailSymbol = ";"
-		c.font = `${resolution + 4}px courier`
+		c.font = `${height/resolution}px courier`
 		c.textAlign = "start"
 		c.textBaseline = "hanging"
 		c.fillStyle = "#fff"
@@ -102,10 +97,10 @@ class Board{
 	}
 
 	createBoard(){
-		for(let i = 0;i<canvas.height / resolution;i++){
+		for(let i = 0;i<resolution * aspectRatio ;i++){
 			this.boardArr.push([])
-			for(let j = 0;j<canvas.width/resolution;j++){
-				this.boardArr[i].push(new Cell(j * resolution,i*resolution))
+			for(let j = 0;j<resolution;j++){
+				this.boardArr[i].push(new Cell(j*(width/resolution),i*(height/resolution)))
 				this.boardArr[i][j].display()
 			}
 		}
@@ -141,6 +136,8 @@ board.update()
 
 let previousTime
 let animationID
+
+console.log(board.boardArr)
 
 function animate(time){
 	
