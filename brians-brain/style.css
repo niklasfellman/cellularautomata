@@ -51,23 +51,28 @@ body{
 }
 
 .show {
-color:#000; 
-visibility:visible;
+	color:#000; 
+	visibility:visible;
 }
 
 #select-rule {
 	margin:5px 0;
-
 	padding:4px;
 	font-family:courier;
 }
+
 #create-btn {
 	background:white;
 	font-weight:700;
 	font-size:16px;
 	font-family:courier;
 	padding:10px 13px 7px 13px;
-
 	border:2px solid black;
 }
 
+.symbol-choice {
+	display:flex;
+	align-items:center;
+	justify-content:right;
+	width:170px;
+}
